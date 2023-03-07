@@ -1,6 +1,6 @@
 import React from "react";
 import Todo, { todoType } from "../../components/todo/Todo";
-import { List, TextInput } from "@mantine/core";
+import { List } from "@mantine/core";
 interface TodolistProps {
   todos: todoType[];
   setTodos: any;
@@ -9,19 +9,7 @@ const Todolist: React.FC<TodolistProps> = (props) => {
   const onDelete = (id: number) => {
     props.setTodos(props.todos.filter((todo) => todo.id !== id));
   };
-  const onComplete = (id: number) => {
-    props.setTodos(
-      props.todos.map((todo) => {
-        if (todo.id === id) {
-          return {
-            ...todo,
-            completed: !todo.completed,
-          };
-        }
-        return todo;
-      })
-    );
-  };
+
   const onEdit = (id: number) => {
     props.setTodos(
       props.todos.map((todo) => {
@@ -45,7 +33,6 @@ const Todolist: React.FC<TodolistProps> = (props) => {
             <Todo
               key={todo.id}
               todo={todo}
-              onComplete={onComplete}
               onDelete={onDelete}
               onEdit={onEdit}
               setInputText={todo.text}
