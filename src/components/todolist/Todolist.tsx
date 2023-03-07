@@ -28,6 +28,8 @@ const Todolist: React.FC<TodolistProps> = (props) => {
         if (todo.id === id) {
           return {
             ...todo,
+            text: todo.text,
+            date: todo.date,
             edit: !todo.edit,
           };
         }
@@ -46,6 +48,7 @@ const Todolist: React.FC<TodolistProps> = (props) => {
               onComplete={onComplete}
               onDelete={onDelete}
               onEdit={onEdit}
+              setInputText={todo.text}
             />
           );
         })}
