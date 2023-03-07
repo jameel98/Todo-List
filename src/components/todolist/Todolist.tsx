@@ -16,8 +16,6 @@ const Todolist: React.FC<TodolistProps> = (props) => {
         if (todo.id === id) {
           return {
             ...todo,
-            text: todo.text,
-            date: todo.date,
             edit: !todo.edit,
           };
         }
@@ -25,6 +23,23 @@ const Todolist: React.FC<TodolistProps> = (props) => {
       })
     );
   };
+
+  const onUpdate = (id: number, value: "") => {
+    props.setTodos(
+      props.todos.map((todo) => {
+        if (todo.id === id) {
+          console.log(value);
+          return {
+            ...todo,
+            text: value,
+            edit: !todo.edit,
+          };
+        }
+        return todo;
+      })
+    );
+  };
+
   return (
     <div className="todo-container">
       <List className="todo-list" key="todoList">
@@ -35,7 +50,7 @@ const Todolist: React.FC<TodolistProps> = (props) => {
               todo={todo}
               onDelete={onDelete}
               onEdit={onEdit}
-              setInputText={todo.text}
+              onUpdate={onUpdate}
             />
           );
         })}

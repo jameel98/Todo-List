@@ -36,7 +36,6 @@ const Form = ({
         {
           text: inputText,
           date: timeInput,
-          completed: false,
           id: Math.random() * 1000,
         },
       ]);

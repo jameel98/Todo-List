@@ -1,7 +1,8 @@
 import { Button, TextInput } from "@mantine/core";
 import React, { FC, useState } from "react";
-import { Check, Edit, Trash } from "tabler-icons-react";
+import { Edit, Trash } from "tabler-icons-react";
 import { List } from "@mantine/core";
+import { DateInput } from "@mantine/dates";
 
 export type todoType = {
   date: Date;
@@ -14,39 +15,47 @@ export interface TodoProps {
   todo: todoType;
   onDelete: Function;
   onEdit: Function;
-  setInputText: any;
+  onUpdate: Function;
 }
 
 const Todo: FC<TodoProps> = (data: TodoProps) => {
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState(data.todo.text);
+  const [date, setDate] = useState(data.todo.date);
 
   const inputTextHandler = (e: any) => {
     setInputText(e.target.value);
   };
 
+  const print = (e: any) => {
+    e.preventDefault();
+    setInputText(e.target.value);
+  };
   return (
     <div className="todo">
       <List.Item key={data.todo.id.toString()} className={"todo-item"}>
         <label className="edit-label">
           {data.todo.edit === true ? (
             <>
-              <TextInput
-                placeholder="Your Task Text"
-                radius={"xl"}
-                size={"md"}
-                type="text"
-                className="edit-input"
-                onChange={inputTextHandler}
-                value={inputText}
-              ></TextInput>
-              <Button
-                onClick={() => {
-                  data.onEdit(data.todo.id);
-                }}
-                className={"save-btn"}
-              >
-                Save
-              </Button>
+              <form className="form" action="">
+                <TextInput
+                  placeholder="Your Task Text"
+                  radius={"xl"}
+                  size={"md"}
+                  onChange={inputTextHandler}
+                  type="text"
+                  className="todo-input"
+                ></TextInput>
+                <Button
+                  className="todo-btton"
+                  type="submit"
+                  onClick={(e: any) => {
+                    print(e);
+                    data.onUpdate(data.todo.id, inputText);
+                  }}
+                >
+                  Save{" "}
+                </Button>
+              </form>
             </>
           ) : (
             data.todo.text + " " + data.todo.date
