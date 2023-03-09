@@ -3,6 +3,7 @@ import "./App.css";
 
 import { Formik } from "formik";
 import Form from "./components/form/Form";
+import FFormik from "./components/form/FFormik";
 import Todolist from "./components/todolist/Todolist";
 import { Text } from "@mantine/core";
 
@@ -19,7 +20,7 @@ function App() {
       <header>
         <Text> THIS IS A SIMPLE TODO-LIST</Text>
       </header>
-      <Form
+      <FFormik
         timeInput={timeInput}
         setTimeInput={setTimeInput}
         inputText={inputText}
