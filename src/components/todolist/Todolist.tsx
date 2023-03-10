@@ -1,10 +1,12 @@
 import React from "react";
 import Todo, { todoType } from "../../components/todo/Todo";
 import { List } from "@mantine/core";
+
 interface TodolistProps {
   todos: todoType[];
   setTodos: any;
 }
+
 const Todolist: React.FC<TodolistProps> = (props) => {
   const onDelete = (id: number) => {
     props.setTodos(props.todos.filter((todo) => todo.id !== id));
@@ -24,7 +26,7 @@ const Todolist: React.FC<TodolistProps> = (props) => {
     );
   };
 
-  const onUpdate = (id: number, value: "") => {
+  const onUpdate = (id: number, value: string) => {
     props.setTodos(
       props.todos.map((todo) => {
         if (todo.id === id) {

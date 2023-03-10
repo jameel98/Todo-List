@@ -6,15 +6,84 @@ import { DateInput } from "@mantine/dates";
 import "./form.css";
 
 import React from "react";
+import { Form, Formik } from "formik";
 
 export type FormProps = {
+  //  setTimeInput: any;
   setInputText: any;
-  setTimeInput: any;
   todos: any;
   setTodos: any;
   inputText: any;
-  timeInput: any;
+  // timeInput: any;
 };
+const myForm = ({ setInputText, todos, setTodos, inputText }: FormProps) => {
+  return (
+    <Formik
+      initialValues={{
+        //  setTimeInput: "",
+        todos: [],
+        inputText: "",
+        setInputText: "",
+        //  timeInput: "",
+        //   date: new Date(),
+      }}
+      onSubmit={(values) => {
+        //  setTimeInput(values.timeInput);
+
+        if (values.inputText !== "") {
+          setTodos([
+            ...todos,
+            {
+              edit: false,
+              text: values.inputText,
+              //    date: timeInput,
+              id: Math.random() * 1000,
+            },
+          ]);
+
+          setInputText("");
+        }
+      }}
+    >
+      {({ handleChange, handleBlur, handleSubmit, values }) => (
+        <Form className="form">
+          <TextInput
+            name="inputText"
+            placeholder="Your Task Text"
+            radius={"xl"}
+            size={"md"}
+            onChange={handleChange}
+            type="text"
+            className="todo-input"
+            required
+          />
+          {/* <MyDatePicker name="date" />*/}
+
+          {/* <DateInput
+            id="timeInput"
+            name="timeInput"
+            value={timeInput}
+            placeholder="Enter date"
+            onChange={setTimeInput}
+            maw={400}
+            mx="auto"
+          />
+      */}
+          <Button
+            rightIcon={<Plus />}
+            onClick={() => handleSubmit}
+            title="Submit"
+            type="submit"
+          ></Button>
+        </Form>
+      )}
+    </Formik>
+  );
+};
+
+export default myForm;
+
+/*
 const Form = ({
   setInputText,
   setTimeInput,
@@ -77,3 +146,4 @@ const Form = ({
 };
 
 export default Form;
+*/
