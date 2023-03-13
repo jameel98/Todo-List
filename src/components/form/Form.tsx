@@ -1,51 +1,41 @@
-import { Button } from "@mantine/core";
-import { Plus } from "tabler-icons-react";
-import { TextInput } from "@mantine/core";
-import { DateInput } from "@mantine/dates";
+import React from "react";
 
+import { Button, TextInput } from "@mantine/core";
+import { Plus } from "tabler-icons-react";
+
+import { Form, Formik } from "formik";
+import { TodoType } from "../todo/Todo";
 import "./form.css";
 
-import React from "react";
-import { Form, Formik } from "formik";
-
 export type FormProps = {
-  //  setTimeInput: any;
-  setInputText: any;
-  todos: any;
-  setTodos: any;
-  inputText: any;
-  // timeInput: any;
+  setInputText: (text: string) => void;
+  setTodos: (todos: TodoType[]) => void;
+  todos: TodoType[];
+  inputText: string;
 };
-const myForm = ({ setInputText, todos, setTodos, inputText }: FormProps) => {
+
+const myForm = ({ setInputText, setTodos, todos }: FormProps) => {
   return (
     <Formik
       initialValues={{
-        //  setTimeInput: "",
         todos: [],
         inputText: "",
-        setInputText: "",
-        //  timeInput: "",
-        //   date: new Date(),
       }}
       onSubmit={(values) => {
-        //  setTimeInput(values.timeInput);
-
+        console.table(values);
         if (values.inputText !== "") {
           setTodos([
             ...todos,
             {
-              edit: false,
               text: values.inputText,
-              //    date: timeInput,
               id: Math.random() * 1000,
             },
           ]);
-
           setInputText("");
         }
       }}
     >
-      {({ handleChange, handleBlur, handleSubmit, values }) => (
+      {({ handleChange, handleSubmit }) => (
         <Form className="form">
           <TextInput
             name="inputText"
@@ -57,18 +47,7 @@ const myForm = ({ setInputText, todos, setTodos, inputText }: FormProps) => {
             className="todo-input"
             required
           />
-          {/* <MyDatePicker name="date" />*/}
 
-          {/* <DateInput
-            id="timeInput"
-            name="timeInput"
-            value={timeInput}
-            placeholder="Enter date"
-            onChange={setTimeInput}
-            maw={400}
-            mx="auto"
-          />
-      */}
           <Button
             rightIcon={<Plus />}
             onClick={() => handleSubmit}
