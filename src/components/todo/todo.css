@@ -2,7 +2,28 @@
   display: flex;
   justify-content: center;
 }
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+.todo-item {
+  margin: 5px 0px 5px 0px;
+}
 
-.List.Item {
-  list-style: none;
+.delete-btn:hover {
+  background-color: red;
+}
+.save-btn:hover {
+  background-color: green;
+}
+.todo-input {
+  color: orange;
+}
+.text-todo {
+  font-size: 22px;
+  color: orange;
+  background-color: aliceblue;
+  width: 250px;
+  overflow-y: scroll;
+  resize: none;
 }

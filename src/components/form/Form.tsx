@@ -14,13 +14,18 @@ export type FormProps = {
   inputText: string;
 };
 
+type FormValuesType = {
+  inputText: string;
+};
+
+const initialValues: FormValuesType = {
+  inputText: "",
+};
+
 const myForm = ({ setInputText, setTodos, todos }: FormProps) => {
   return (
     <Formik
-      initialValues={{
-        todos: [],
-        inputText: "",
-      }}
+      initialValues={initialValues}
       onSubmit={(values) => {
         console.table(values);
         if (values.inputText !== "") {
@@ -40,7 +45,6 @@ const myForm = ({ setInputText, setTodos, todos }: FormProps) => {
           <TextInput
             name="inputText"
             placeholder="Your Task Text"
-            radius={"xl"}
             size={"md"}
             onChange={handleChange}
             type="text"
@@ -49,11 +53,14 @@ const myForm = ({ setInputText, setTodos, todos }: FormProps) => {
           />
 
           <Button
+            className="btn"
             rightIcon={<Plus />}
             onClick={() => handleSubmit}
             title="Submit"
             type="submit"
-          ></Button>
+          >
+            Add task
+          </Button>
         </Form>
       )}
     </Formik>
@@ -61,68 +68,3 @@ const myForm = ({ setInputText, setTodos, todos }: FormProps) => {
 };
 
 export default myForm;
-
-/*
-const Form = ({
-  setInputText,
-  setTimeInput,
-  todos,
-  setTodos,
-  inputText,
-  timeInput,
-}: FormProps) => {
-  const inputTextHandler = (e: any) => {
-    console.log(e.target.value);
-    setInputText(e.target.value);
-  };
-
-  const submitTodoHandler = (e: any) => {
-    e.preventDefault();
-    if (inputText !== "") {
-      setTodos([
-        ...todos,
-        {
-          text: inputText,
-          date: timeInput,
-          id: Math.random() * 1000,
-        },
-      ]);
-
-      setInputText("");
-    }
-  };
-
-  return (
-    <form className="form" action="">
-      <TextInput
-        placeholder="Your Task Text"
-        radius={"xl"}
-        size={"md"}
-        onChange={inputTextHandler}
-        type="text"
-        className="todo-input"
-        required
-      />
-      <DateInput
-        value={timeInput}
-        onChange={setTimeInput}
-        label="Date input"
-        placeholder="Date input"
-        maw={400}
-        mx="auto"
-      />
-
-      <Button
-        rightIcon={<Plus />}
-        onClick={submitTodoHandler}
-        className="todo-btton"
-        type="submit"
-      >
-        Add{" "}
-      </Button>
-    </form>
-  );
-};
-
-export default Form;
-*/

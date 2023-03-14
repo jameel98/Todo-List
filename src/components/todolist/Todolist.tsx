@@ -6,7 +6,6 @@ interface TodolistProps {
   todos: TodoType[];
   setTodos: (todos: TodoType[]) => void;
 }
-//todo: addd types
 const Todolist: React.FC<TodolistProps> = (props: TodolistProps) => {
   const onDelete = useCallback(
     (id: number) => {
@@ -14,9 +13,6 @@ const Todolist: React.FC<TodolistProps> = (props: TodolistProps) => {
     },
     [props]
   );
-
-  //todo: make state edit in todo component
-  //todo: useCallback for all functions inside the components
 
   const onUpdate = useCallback(
     (id: number, text: string) => {
@@ -26,23 +22,8 @@ const Todolist: React.FC<TodolistProps> = (props: TodolistProps) => {
       });
       newTodos[index] = { id, text };
       onDelete(index);
-      //  props.setTodos(newTodos);
-      // props.setTodos(
-      //   //todo:
-
-      //   props.todos.map((todo) => {
-      //     if (todo.id === id) {
-      //       console.log(text);
-      //       return {
-      //         ...todo,
-      //         text: text,
-      //       };
-      //     }
-      //     return todo;
-      //   })
-      // );
     },
-    [props]
+    [props, onDelete]
   );
 
   return (
